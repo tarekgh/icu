@@ -2,9 +2,9 @@
 <SignConfigXML>
   
     <job platform="AnyCPU" certSubject="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
-    configuration="Release" dest="__OUTPATHROOT__\signed" jobname="MS-ICU x86 Release binaries" approvers="">
+    configuration="Release" dest="__OUTPATHROOT__\signed" jobname="Code Sign MS-ICU binaries" approvers="">
    
-    <!-- We use the AuthenticodeFormer cert since we have made modifcations to the OSS code. -->
+    <!-- We use the AuthenticodeFormer cert as we have made modifcations to the code. -->
 
     <!-- EXEs -->
     <file src="__INPATHROOT__\derb.exe"     signType="AuthenticodeFormer" />
