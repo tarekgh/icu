@@ -94,10 +94,10 @@ foreach ($arch in $architectures)
 # Copy the headers
 Copy-Item $icuHeaders -Destination "$outputNugetLocation\build\native\include" -Recurse
 
-# Add the License file (Append ".txt" to the name.)
+# Add the License file
 Write-Host "Copying the License file into the Nuget location."
 $licenseFile = Resolve-Path "$icuSource\LICENSE"
-Copy-Item $licenseFile -Destination "$outputNugetLocation\LICENSE.txt"
+Copy-Item $licenseFile -Destination "$outputNugetLocation\LICENSE"
 
 # Copy the Nuget "targets" files.
 Copy-Item "$sourceRoot\build\nuget\*.targets" -Destination "$outputNugetLocation\build\native"
