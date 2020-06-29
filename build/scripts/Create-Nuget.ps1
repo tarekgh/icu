@@ -31,7 +31,7 @@ param(
     [string]$output,
 
     [Parameter(Mandatory=$true)]
-    [bool]$codeSigned,
+    [bool]$codeSigned
 )
 
 # We should already have the nugetPackageVersion set as an environment variable in Set-ICUVersion.ps1.
