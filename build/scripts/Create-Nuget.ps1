@@ -10,6 +10,9 @@
     The path to the location of the signed ICU binaries. Must already exist.
     Under this path there should be one folder per-arch: x64, x86, ARM, or ARM64.
 
+.PARAMETER icuHeaders
+    The path to the location of the public ICU headers. Must already exist.
+
 .PARAMETER output
     The path to the output location. This script will create a subfolder named "nuget" for the Nuget package(s).
 
@@ -25,6 +28,10 @@ param(
     [Parameter(Mandatory=$true)]
     [ValidateScript({Test-Path $_ -PathType 'Container'})]
     [string]$icuBinaries,
+
+    [Parameter(Mandatory=$true)]
+    [ValidateScript({Test-Path $_ -PathType 'Container'})]
+    [string]$icuHeaders,
 
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
@@ -85,7 +92,7 @@ foreach ($arch in $architectures)
 }
 
 # Copy the headers
-Copy-Item "$icuSource\include\unicode" -Destination "$outputNugetLocation\build\native\include" -Recurse
+Copy-Item $icuHeaders -Destination "$outputNugetLocation\build\native\include" -Recurse
 
 # Add the License file (Append ".txt" to the name.)
 Write-Host "Copying the License file into the Nuget location."
