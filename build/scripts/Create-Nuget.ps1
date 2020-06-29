@@ -92,7 +92,7 @@ foreach ($arch in $architectures)
 }
 
 # Copy the headers
-Copy-Item $icuHeaders -Destination "$outputNugetLocation\build\native\include" -Recurse
+Copy-Item "$icuHeaders\*" -Destination "$outputNugetLocation\build\native\include\unicode" -Recurse
 
 # Add the License file
 Write-Host "Copying the License file into the Nuget location."
@@ -103,12 +103,12 @@ Copy-Item $licenseFile -Destination "$outputNugetLocation\LICENSE"
 Copy-Item "$sourceRoot\build\nuget\*.targets" -Destination "$outputNugetLocation\build\native"
 
 # Update the placeholders in the template nuspec file.
-$nuspecFileContent = (Get-Content "$sourceRoot\build\nuget\Template-Microsoft.icu4c.nuspec")
+$nuspecFileContent = (Get-Content "$sourceRoot\build\nuget\Template-Microsoft.icu4c.win.nuspec")
 $nuspecFileContent = $nuspecFileContent.replace('$id$', 'Microsoft.icu4c.win')
 $nuspecFileContent = $nuspecFileContent.replace('$version$', $env:nugetPackageVersion)
-$nuspecFileContent | Set-Content "$outputNugetLocation\Microsoft.icu4c.nuspec"
+$nuspecFileContent | Set-Content "$outputNugetLocation\Microsoft.icu4c.win.nuspec"
 
 # Actually do the "nuget pack" operation
-$nugetCmd = ("nuget pack $outputNugetLocation\Microsoft.icu4c.nuspec -BasePath $outputNugetLocation -OutputDirectory $output")
+$nugetCmd = ("nuget pack $outputNugetLocation\Microsoft.icu4c.win.nuspec -BasePath $outputNugetLocation -OutputDirectory $output")
 Write-Host "Executing: $nugetCmd"
 &cmd /c $nugetCmd
